@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend Sessions At CGC",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type": "git",
+    "url": "git+https://github.com/iamsayeeduddin/cgc-backend-1.git"
+  },
+  "keywords": [
+    "Backend"
+  ],
+  "author": "Syed Sayeeduddin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamsayeeduddin/cgc-backend-1/issues"
+  },
+  "homepage": "https://github.com/iamsayeeduddin/cgc-backend-1#readme"
+}
