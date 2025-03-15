@@ -1,14 +1,11 @@
 const express = require("express");
 const booksRoutes = require("./bookRoutes");
-const ProductModel = require("../models/productModel");
+const productRoutes = require("./productRoutes");
 const router = express.Router();
 
 router.use("/books", booksRoutes);
 
-router.use("/products", async (req, res) => {
-  const products = await ProductModel.find();
-  res.status(200).json(products);
-});
+router.use("/products", productRoutes);
 
 module.exports = router;
 
