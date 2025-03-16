@@ -1,10 +1,51 @@
 const ProductModel = require("../models/productModel");
 const { responseObjGenerator } = require("../utils/utils");
 
+// PAGINATION
+// page => The Page being visited
+// pageSize => No of Records to be shown in one page
+// Skip => (page - 1) * pageSize
+
 const getProducts = async (req, res) => {
-  const products = await ProductModel.find();
+  const { page, pageSize } = req.params;
+  const skip = (page - 1) * pageSize;
+  const data = req.body;
+  let filter = {};
+  if (data) {
+    if (data.isSearch) {
+      filter = {
+        $or: [{ name: { $regex: data.search, $options: "i" } }, { category: { $regex: data.search, $options: "i" } }],
+      };
+    } else {
+      filter = {
+        ...data,
+      };
+    }
+  }
+
+  const { sort, dir } = req.query;
+  console.log(req.query);
+
+  const products = await ProductModel.find(filter)
+    .sort({
+      [sort]: dir,
+    })
+    .skip(skip)
+    .limit(pageSize);
+  const count = await ProductModel.countDocuments();
   res.status(200).json(products);
 };
+
+// const searchProduct = async (req, res) => {
+//   try {
+//     const data = req.body;
+//     const products = await ProductModel.find();
+//   } catch (e) {
+//     console.log(e);
+//     let resObj = responseObjGenerator(false);
+//     res.status(500).json(resObj);
+//   }
+// };
 
 const addProduct = async (req, res) => {
   try {

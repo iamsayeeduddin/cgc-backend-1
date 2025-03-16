@@ -7,6 +7,11 @@ app.listen(5000, () => console.log("Server is Up & Running!"));
 
 app.use(express.json());
 
+// app.use((req, res, next) => {
+//   console.log("I am in middleware!");
+//   next();
+// });
+
 app.use("/api/v1/", require("./routes/routes"));
 
 mongoose
