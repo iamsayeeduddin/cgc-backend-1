@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 const responseObjGenerator = (success, message, data) => {
   let resObj = {};
   resObj.success = success;
@@ -8,6 +10,16 @@ const responseObjGenerator = (success, message, data) => {
   return resObj;
 };
 
+const hashPassword = (plainPass) => {
+  return bcrypt.hash(plainPass, 2);
+};
+
+const comparePassword = (plainPassword, hashedPassword) => {
+  return bcrypt.compare(plainPassword, hashedPassword);
+};
+
 module.exports = {
+  hashPassword,
+  comparePassword,
   responseObjGenerator,
 };
