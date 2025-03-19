@@ -15,6 +15,6 @@ app.use(express.json());
 app.use("/api/v1/", require("./routes/routes"));
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/cgc")
+  .connect(process.env.DB_URL)
   .then(() => console.log("DB Connected to Server!"))
   .catch((err) => console.log(err));

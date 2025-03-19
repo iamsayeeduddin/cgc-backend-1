@@ -1,5 +1,5 @@
 const userModel = require("../models/userModel");
-const { hashPassword, comparePassword } = require("../utils/utils");
+const { hashPassword, comparePassword, generateToken } = require("../utils/utils");
 
 const signup = async (req, res) => {
   try {
@@ -27,7 +27,7 @@ const login = async (req, res) => {
     if (user) {
       const isPasswordMatches = await comparePassword(password, user.password);
       if (isPasswordMatches) {
-        // const token = generateToken({ email, name: user.name, id: user._id, userRole: user.userRole });
+        const token = generateToken({ email, name: user.name, id: user._id, userRole: user.userRole });
         return res.status(200).json({
           message: "User Loggedin Successfully!",
           success: true,
@@ -35,7 +35,7 @@ const login = async (req, res) => {
             name: user.name,
             email: user.email,
             _id: user._id,
-            // token,
+            token,
           },
         });
       }
@@ -52,3 +52,8 @@ module.exports = { signup, login };
 // HASHING ->
 
 // password1234 => 983y2nj23n823h02ihr023nr0nf023 => 9293823nj2i3rb29r92fb9b#B(b)
+
+// eyJhbGciOiAiSFMyNTYiLCJ0eXAiOiAiSlJUUyJ9.eyJzdWIiOiAiMTIzNDU2Nzg5MCIsIm5hbWUiOiAiSm9obiBEb2UiLCJpYXQiOiAxNTE2MjM5MDIyfQ
+//   .VIap2XxDZPQisJEd3hyYbqVXY5HMG9 -
+//   ymS1aR0 -
+//   X_kA;

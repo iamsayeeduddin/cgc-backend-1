@@ -1,19 +1,30 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const productCtrl = require("../controllers/productCtrl");
 
 const router = express.Router();
 
 const isLoggedIn = (req, res, next) => {
-  if (req.body.isLoggedIn) {
-    console.log("IsLOGGEDIN");
-    next();
+  if (req.headers.authorization) {
+    console.log(req.headers.authorization);
+    const token = req.headers.authorization.split(" ")[1];
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+      if (err) {
+        console.error(err);
+        res.status(401).send("Invalid Token!");
+      } else {
+        console.log(decoded);
+        req.role = 2;
+        next();
+      }
+    });
   } else {
     res.status(401).send("Unauthorized!");
   }
 };
 
 const isAdmin = (req, res, next) => {
-  if (req.body.role === "ADMIN") {
+  if (req.role === 1) {
     console.log("ISADMIN");
     next();
   } else {

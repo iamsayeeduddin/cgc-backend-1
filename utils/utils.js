@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const responseObjGenerator = (success, message, data) => {
   let resObj = {};
@@ -18,8 +19,13 @@ const comparePassword = (plainPassword, hashedPassword) => {
   return bcrypt.compare(plainPassword, hashedPassword);
 };
 
+const generateToken = (data) => {
+  return jwt.sign(data, process.env.SECRET_KEY, { expiresIn: "1d" });
+};
+
 module.exports = {
   hashPassword,
+  generateToken,
   comparePassword,
   responseObjGenerator,
 };
