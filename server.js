@@ -1,5 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
 
@@ -11,6 +14,17 @@ app.use(express.json());
 //   console.log("I am in middleware!");
 //   next();
 // });
+
+const dir = path.join(__dirname, "logs");
+
+if (!fs.existsSync(dir)) {
+  fs.mkdirSync(dir);
+}
+
+const filePath = path.join(__dirname, "logs", "request.log");
+const stream = fs.createWriteStream(filePath, { flags: "a" });
+
+app.use(morgan("combined", { stream }));
 
 app.use("/api/v1/", require("./routes/routes"));
 

@@ -20,8 +20,10 @@
   "homepage": "https://github.com/iamsayeeduddin/cgc-backend-1#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "bunyan": "^1.8.15",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.12.1"
+    "mongoose": "^8.12.1",
+    "morgan": "^1.10.0"
   }
 }

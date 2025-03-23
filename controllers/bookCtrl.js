@@ -1,3 +1,5 @@
+const { applogger } = require("../utils/utils");
+
 let books = [
   {
     id: 1,
@@ -40,6 +42,7 @@ const getBookId = (req, res) => {
   if (book) {
     res.status(200).json(book);
   } else {
+    applogger.error({ success: false, message: "Book Not found!" });
     res.status(404).send("Book Not found!");
   }
 };

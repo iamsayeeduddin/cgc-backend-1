@@ -1,5 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const bunyan = require("bunyan");
+const path = require("path");
 
 const responseObjGenerator = (success, message, data) => {
   let resObj = {};
@@ -23,7 +25,15 @@ const generateToken = (data) => {
   return jwt.sign(data, process.env.SECRET_KEY, { expiresIn: "1d" });
 };
 
+const apploggerPath = path.join(__dirname, "..", "logs", "app.log");
+
+const applogger = bunyan.createLogger({
+  name: "ecomLogger",
+  streams: [{ path: apploggerPath }],
+});
+
 module.exports = {
+  applogger,
   hashPassword,
   generateToken,
   comparePassword,
