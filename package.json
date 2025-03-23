@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --env-file=.env.local server.js ",
-    "prod": "nodemon --env-file=.env server.js ",
+    "prod": "node --env-file=.env server.js ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "type": "git",
     "url": "git+https://github.com/iamsayeeduddin/cgc-backend-1.git"
