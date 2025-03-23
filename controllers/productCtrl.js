@@ -50,6 +50,8 @@ const getProducts = async (req, res) => {
 const addProduct = async (req, res) => {
   try {
     const data = req.body;
+    data.imagePath = data.filename;
+    delete data.filename;
     const product = new ProductModel(data);
     await product.save();
     let resObj = responseObjGenerator(true, "Product Added Successfully!", product);

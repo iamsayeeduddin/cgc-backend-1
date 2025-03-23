@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const bunyan = require("bunyan");
 const path = require("path");
+const multer = require("multer");
 
 const responseObjGenerator = (success, message, data) => {
   let resObj = {};
@@ -32,7 +33,22 @@ const applogger = bunyan.createLogger({
   streams: [{ path: apploggerPath }],
 });
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    const name = Date.now() + "_" + file.originalname;
+    req.body.filename = name;
+    console.log(name);
+    cb(null, name);
+  },
+});
+
+const upload = multer({ storage });
+
 module.exports = {
+  upload,
   applogger,
   hashPassword,
   generateToken,

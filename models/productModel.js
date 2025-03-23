@@ -10,6 +10,7 @@ const productSchema = new Schema(
     price: { type: Number, required: true },
     discountType: { type: String },
     discount: { type: Number },
+    imagePath: { type: String },
     //   createdAt: { type: Date, required: true },
     //   updatedAt: { type: Date, default: Date.now },
   },

@@ -4,7 +4,8 @@
   "description": "Backend Sessions At CGC",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --env-file=.env server.js ",
+    "dev": "nodemon --env-file=.env.local server.js ",
+    "prod": "nodemon --env-file=.env server.js ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "type": "git",
     "url": "git+https://github.com/iamsayeeduddin/cgc-backend-1.git"
@@ -24,6 +25,7 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.12.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.2"
   }
 }

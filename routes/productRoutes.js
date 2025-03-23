@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const productCtrl = require("../controllers/productCtrl");
+const { upload } = require("../utils/utils");
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ const isAdmin = (req, res, next) => {
 router.get("/", productCtrl.getProducts);
 router.get("/page/:page/pageSize/:pageSize", productCtrl.getProducts);
 router.post("/page/:page/pageSize/:pageSize", isLoggedIn, isAdmin, productCtrl.getProducts);
-router.post("/addProduct", productCtrl.addProduct);
+router.post("/addProduct", upload.single("productImg"), productCtrl.addProduct);
 router.patch("/updateProduct/:id", productCtrl.updateProduct);
 router.put("/updateProduct/:id", productCtrl.updateCompProduct);
 router.delete("/deleteProduct/:id", productCtrl.deleteProduct);

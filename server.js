@@ -6,7 +6,7 @@ const path = require("path");
 
 const app = express();
 
-app.listen(5000, () => console.log("Server is Up & Running!"));
+app.listen(5001, () => console.log("Server is Up & Running!"));
 
 app.use(express.json());
 
@@ -16,9 +16,14 @@ app.use(express.json());
 // });
 
 const dir = path.join(__dirname, "logs");
+const uploadDir = path.join(__dirname, "uploads");
 
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
+}
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
 }
 
 const filePath = path.join(__dirname, "logs", "request.log");
