@@ -12,6 +12,7 @@ const signup = async (req, res) => {
     await user.save();
     res.status(201).json({ message: "User Added Successfully!", success: true });
   } catch (err) {
+    console.log(err, "err in signup");
     if (err.errorResponse.errmsg.includes("duplicate key")) {
       res.status(400).json({ message: "Email Already Exists!", success: false });
     } else {
